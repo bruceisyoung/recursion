@@ -7,7 +7,6 @@
 var getElementsByClassName = function(className) {
   // your code here
   var elementList = [];
-  var result = [];
   function listElement(item) {
     elementList.push(item);
   	if(item.childNodes.length>0){
@@ -16,9 +15,8 @@ var getElementsByClassName = function(className) {
   	}	
   }
   listElement(document.body);
-  for(var i=0; i<elementList.length; i++){
-  	if(elementList[i].nodeType!==3&&elementList[i].classList.contains(className))
-  	  result.push(elementList[i]);
-  }
-  return result;
+  return elementList.filter(function(item){
+           if(item.nodeType!==3)
+             return item.classList.contains(className);
+  });
 };
